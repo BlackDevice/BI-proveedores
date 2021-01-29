@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp -->
+<html lang="en" class="metro-no-touch-device">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+    <title>Senegocia - B.I. </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    <script src="./Senegocia - B.I._files/reload.js.descarga"></script>
+    <script src="./Senegocia - B.I._files/jquery-3.3.1.min.js.descarga"></script>
+    <link rel="stylesheet" href="./Senegocia - B.I._files/graficpie.css">
+    <link rel="stylesheet" href="./Senegocia - B.I._files/ImprimirCapas.css" media="print">
+    <link rel="stylesheet" href="./Senegocia - B.I._files/TilesN.css">
+    <script src="./Senegocia - B.I._files/jquery.dataTables.js.descarga"></script>
+    <script src="./Senegocia - B.I._files/jquery.tablesorter2.js.descarga"></script>
+    <script src="./Senegocia - B.I._files/reload.js(1).descarga"></script>
+    <script src="./Senegocia - B.I._files/highcharts.js.descarga"></script>
+    <script src="./Senegocia - B.I._files/highcharts-3d.js.descarga"></script>
+    <script src="./Senegocia - B.I._files/exporting.js.descarga"></script>
+    <style>
+        .app-bar-menu li {
+            list-style: none !important;
+        }
+        
+        #idMensajePag {
+            position: fixed;
+            top: 1px;
+            height: 100%;
+            width: 100%;
+            border: 0px solid #8cb5f2;
+            z-Index: 2000 !important;
+            opacity: 0.95;
+            background-color: #ffffff;
+        }
+    </style>
+    <script src="./Senegocia - B.I._files/jspdf.min.js.descarga"></script>
+    <script src="./Senegocia - B.I._files/faker.min.js.descarga"></script>
+    <script src="./Senegocia - B.I._files/jspdf.plugin.autotable.src.js.descarga"></script>
+    <script src="./Senegocia - B.I._files/examples.js.descarga"></script>
+    <script>
+        function update(shouldDownload) {
+
+            var doc = new jsPDF();
+            var imgHeight = 140;
+            var imgWidth = 140;
+            var positionY = 20;
+            var positionX = 20;
+
+            doc.setFontSize(15);
+            doc.text(15, 15, 'Hola JSPDF y html2canvas');
+
+            html2canvas($('#gbarras'), {
+                onrendered: function(canvas) {
+                    var img = canvas.toDataURL('image/jpeg');
+                    doc.addImage(img, 'JPEG', positionX, positionY, 140, imgWidth);
+                    doc.save('MyPdf.pdf');
+                }
+            });
+            var pdf = new jsPDF('p', 'pt', 'letter')
+
+            // source can be HTML-formatted string, or a reference                              
+            // to an actual DOM element from which the text will be scraped.                    
+            ,
+            source = $('#dvCapaTablaNivel')[0]
+
+            // we support special element handlers. Register them with jQuery-style             
+            // ID selector for either ID or node name. ('#iAmID', 'div', 'span' etc.)           
+            // There is no support for any other type of selectors                              
+            // (class, of compound) at this time.                                               
+            ,
+            specialElementHandlers = {
+                // element with id of 'bypass' - jQuery style selector                          
+                '#bypassme': function(element, renderer) {
+                    // true = 'handled elsewhere, bypass text extraction'                       
+                    return true
+                }
+            }
+
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+            // all coords and widths are in jsPDF instance's declared units                   
+            // 'inches' in this case                                                          
+            pdf.fromHTML(
+                source // HTML string or DOM elem ref.                                          
+                , margins.left // x coord                                                       
+                , margins.top // y coord                                                        
+                , {
+                    'width': margins.width // max width of content on PDF                       
+                        ,
+                    'elementHandlers': specialElementHandlers
+                },
+                function(dispose) {
+                    // dispose: object with X, Y of the last line add to the PDF                  
+                    //          this allow the insertion of new lines after html                  
+                    pdf.save('Test.pdf');
+                },
+                margins
+            )
+
+
+        }
+
+        function htmlToPDF(idTable, idIMG) {
+            var doc = new jsPDF();
+
+            var imgHeight = 140;
+            var imgWidth = 180;
+            var positionY = 20;
+            var positionX = 20;
+
+            var elem = document.getElementById(idTable);
+            var res = doc.autoTableHtmlToJson(elem);
+
+
+            html2canvas($('#' + idIMG), {
+                onrendered: function(canvas) {
+                    var img = canvas.toDataURL('image/jpeg');
+                    doc.addImage(img, 'JPEG', positionX, positionY, imgHeight, imgWidth);
+                    //doc.text('From HTML', 50, 160);                                                
+                    //doc.autoTable(res.columns, res.data, {startY: 180});                           
+                    doc.save('Tablita.pdf');
+                }
+            });
+
+
+
+        }
+    </script>
+    <style type="text/css">
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+        
+        #idMensajePag {
+            position: fixed;
+            top: 1px;
+            height: 100%;
+            width: 100%;
+            border: 0px solid #8cb5f2;
+            z-Index: 2;
+            opacity: 0.75;
+            background-color: #ffffff;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <script>
+        var vcGlosa;
+        var vcOpcionPadre;
+        var vcPaginaActual = 'PanelInicial.asp'
+        var iMonedaID = 5
+        var iAgnoVista = 2021
+        var iPorcRecuadro = 1
+        var vcAgnoComparado = '-';
+        var vcExcluirGlobal = '';
+        var vcExcluirGlobal2 = '';
+        var vcElementoX = '';
+        var vcArmaCategoria1 = '';
+        var vcArmaMonto1 = '';
+        var vcArmaCant1 = '';
+        var vcArmaCategoria2 = '';
+        var vcArmaMonto2 = '';
+        var vcArmaCant2 = '';
+        var vcVectorOpcionesSel = '';
+        var vcDetalleAux = '';
+        var iDetalleAux = 0
+        var iContador = 0
+        var iComparativoTablaX = 0
+        var iOrdenSP = 1
+        var iFamiliaID = 0
+        var vcFiltroSP = ''
+        var iMes = 0
+        var vcMes = ''
+        var iTipoCompraID = 0
+        var vcTipoCompra = ''
+        var iCompradorID = 0
+        var vcComprador = ''
+        var iMes = 0
+        var vcMes = ''
+        var iCompradorID = 0
+        var vcComprador = ''
+        var iInvitacionID = 0
+        var vcInvitacion = ''
+
+
+        function MuestraOC(iOCID, iCompradorID) {
+            var url = '../VerOC.asp?lCompradorID=' + iCompradorID + '&lOrdenCompraID=' + iOCID
+            window.open(url, 'OC', 'resizable=yes,toolbar=no,scrollbars=yes,width=840,height=650,top=5,left=5');
+        }
+
+        function MuestraCot(iCotID) {
+            var url = '../detalle_cotizacion.asp?w_cot_id=' + iCotID
+            window.open(url, 'Cot', 'resizable=yes,toolbar=no,scrollbars=yes,width=840,height=650,top=5,left=5');
+        }
+
+        function PreviaFiltro(vcFiltro, vcGlosaNivel, vcGlosaGraf) {
+            var t = vcFiltro,
+                z = 'Buscar ' + vcGlosaNivel
+            if (t.length < 4 || t == z) {
+                alert('Debe escribir mas de 4 caracteres para realizar la busqueda')
+                $('#BuscadorX').val('')
+                $('#BuscadorX').focus()
+            } else {
+                RecargarDiv(capa, url)
+            }
+        }
+
+        function Desmarcar(opcion, Cant, Objeto) {
+            vcElementoX = Objeto;
+            $('#dvCot').removeClass("selected")
+            $('#dvSolPed').removeClass("selected")
+            $('#dvOC').removeClass("selected")
+            $('#dvCompDir').removeClass("selected")
+            $('#dvContMarco').removeClass("selected")
+            Marcar(opcion, Cant)
+        }
+
+        function Marcar(opcion, Cant) {
+            var nombreclase = '';
+            vcExcluirGlobal = '';
+            vcExcluirGlobal2 = '';
+            iTipoCompraID = 0
+            vcVectorOpcionesSel = '';
+            vcTipoCompra = '';
+            if (opcion == 'dvCot') {
+                nombreclase = 'selected'
+                vcExcluirGlobal = 'Tipo-Compra'
+                vcExcluirGlobal2 = 'Tipo-Compra'
+                iTipoCompraID = 1
+                vcTipoCompra = 'Cotizacion'
+                vcVectorOpcionesSel = 'Tipo-Compra>'
+            } else if (opcion == 'dvSolPed') {
+                nombreclase = 'selected'
+            } else if (opcion == 'dvOC') {
+                nombreclase = 'selected'
+            } else if (opcion == 'dvCompDir') {
+                nombreclase = 'selected'
+                vcExcluirGlobal = 'Tipo-Compra'
+                vcExcluirGlobal2 = 'Tipo-Compra'
+                iTipoCompraID = 3
+                vcTipoCompra = 'Compra Directa'
+                vcVectorOpcionesSel = 'Tipo-Compra>'
+            } else if (opcion == 'dvContMarco') {
+                nombreclase = 'selected'
+                vcExcluirGlobal = 'Tipo-Compra'
+                vcExcluirGlobal2 = 'Tipo-Compra'
+                iTipoCompraID = 2
+                vcTipoCompra = 'Contrato Marco'
+                vcVectorOpcionesSel = 'Tipo-Compra>'
+            }
+            vcOpcionPadre = opcion
+            $('#' + opcion).addClass(nombreclase);
+            if (Cant > 0 && vcOpcionPadre != 'dvSolPed') {
+                PopUp(vcExcluirGlobal, vcExcluirGlobal2, vcOpcionPadre)
+            } else if (Cant > 0 && vcOpcionPadre == 'dvSolPed') {
+                PopUp2(vcExcluirGlobal, vcExcluirGlobal2, vcOpcionPadre)
+            } else {
+                var notify = Metro.notify;
+                notify.create('No hay Informaci�n a mostrar.<BR> Favor seleccione otro Panel.', '<B>Informativo:</B>', {
+                    cls: 'alert'
+                });
+            }
+        }
+
+        function showDashBoard() {
+            for (var i = 1; i <= 3; i++) {
+                $('.col' + i).each(function() {
+                    $(this).addClass('fadeInForward-' + i).removeClass('fadeOutback');
+                });
+            }
+        }
+
+        function VerProcCuadros(opcion) {
+            if (opcion == 'OpCantidades') {
+                $('#OpCantidades').addClass('checked').removeClass('unchecked')
+                $('#OpMontos').addClass('unchecked').removeClass('checked')
+                iPorcRecuadro = 1
+            } else if (opcion == 'OpMontos') {
+                $('#OpMontos').addClass('checked').removeClass('unchecked')
+                $('#OpCantidades').addClass('unchecked').removeClass('checked')
+                iPorcRecuadro = 2
+            }
+            var url = 'PanelInicial.asp?iMonedaID=' + iMonedaID + '&iAgnoVista=' + iAgnoVista + '&iPorcRecuadro=' +
+                iPorcRecuadro
+            location.href = url
+        }
+
+        function CambioPorcRecMO() {
+            if (vcPaginaActual == 'PanelInicial.asp') {
+                $('#CambioPorcRec').show()
+            } else {
+                $('#CambioPorcRec').hide()
+            }
+        }
+
+        function MuestraCargando() {
+            if (vcPaginaActual == 'PanelInicial.asp') {
+                $('#dvCuerpo').fadeOut(1000);
+            }
+            $('#idMensajePag').fadeIn(2000);
+        }
+
+        function fadeDashBoard() {
+            for (var i = 1; i <= 3; i++) {
+                $('.col' + i).addClass('fadeOutback').removeClass('fadeInForward-' + i);
+            }
+        }
+
+        function EjecVent(OpSel) {
+            $('#cortina').fadeIn(1);
+            MuestraCargando();
+            var $this = $(vcElementoX),
+                TituloTile = '',
+                vcTxt = '',
+                CuerpoTile = '<P CLASS="text-center">' +
+                '<IMG SRC="img/728Fast.gif" CLASS="size1"/></P>',
+                iTileID = vcElementoX.id
+            if (iTileID == 'dvCot') {
+                TituloTile = '<H1 CLASS="text-center fg-white">' +
+                    '<I CLASS="icon-pencil"></I> Cotizaci�n</H1><BR>'
+            } else if (iTileID == 'dvSolPed') {
+                TituloTile = '<H1 CLASS="text-center fg-white">' +
+                    '<I CLASS="icon-list"></I> Cotizaciones</H1><BR>'
+            } else if (iTileID == 'dvOC') {
+                TituloTile = '<H1 CLASS="text-center fg-white">' +
+                    '<I CLASS="icon-clipboard-2"></I> Orden de Compra</H1><BR>'
+            } else if (iTileID == 'dvCompDir') {
+                TituloTile = '<H1 CLASS="text-center fg-white">' +
+                    '<I CLASS="icon-tab"></I> Compra Directa</h1><br>'
+            } else if (iTileID == 'dvContMarco') {
+                TituloTile = '<H1 CLASS="text-center fg-white">' +
+                    '<I CLASS="icon-bookmark-2"></I> Contrato Marco</H1><BR>'
+            }
+            $('#ventana').html(TituloTile + CuerpoTile)
+            $('#dvCot').removeClass("selected")
+            $('#dvSolPed').removeClass("selected")
+            $('#dvOC').removeClass("selected")
+            $('#dvCompDir').removeClass("selected")
+            $('#dvContMarco').removeClass("selected")
+            var page = $this.data('page-name'),
+                bgcolor = $this.css('background-color'),
+                pageType = $this.data('page-type'),
+                textColor = $this.css('color');
+            $('.' + page).css({
+                    'background-color': bgcolor,
+                    'color': textColor
+                })
+                .find('.close-button').css({
+                    'background-color': textColor,
+                    'color': bgcolor
+                });
+            $('.' + page).addClass('openpage');
+            fadeDashBoard();
+            setTimeout(function() {
+                CargaPag(0, OpSel, vcOpcionPadre)
+            }, 1500);
+            vcElementoX = ''
+        }
+
+        function SacaCapa() {
+            if (vcPaginaActual == 'PanelInicial.asp') {
+                setTimeout(function() {
+                    $('#ventana').parent().addClass('slidePageLeft')
+                        .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+                            $(this).removeClass('slidePageLeft').removeClass('openpage');
+                        });
+                }, 10)
+            }
+        }
+
+        function PopUp(excluir, excluir2, opcion) {
+            iFamiliaID = 1
+            var jsM = "CargaPag(0,"
+            var jsF = ',"' + vcOpcionPadre + '")'
+            if (vcElementoX != '') {
+                jsM = "EjecVent(";
+                jsF = ")"
+            }
+            var Periodo1 =
+                '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Per�odo" OnClick=' +
+                jsM +
+                '"Periodo"' + jsF + '></li>'
+            var TipoCompra1 =
+                '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Tipo Compra" OnClick=' +
+                jsM + '"Tipo-Compra"' + jsF + '></li>'
+            var Comprador1 =
+                '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Empresa Compradora" OnClick=' +
+                jsM + '"Comprador"' + jsF + '></li>'
+
+            if (iMes != 0) {
+                Periodo1 = ''
+            }
+            if (iTipoCompraID != 0) {
+                TipoCompra1 = ''
+            }
+            if (iCompradorID != 0) {
+                Comprador1 = ''
+            }
+
+            var codigo = '<ul data-role="listview" data-view="list" data-select-node="true">' +
+                Periodo1 + TipoCompra1 + Comprador1 +
+                '</ul>'
+            Metro.dialog.create({
+                title: "<h4><span class='mif-clipboard'></span> Opciones de Consulta</h4>",
+                content: "<div>" + codigo + "</div>",
+                defaultAction: false,
+                clsDialog: "secondary",
+                actions: [{
+                    caption: "Cerrar",
+                    cls: "js-dialog-close alert",
+                }]
+            });
+        }
+
+
+        function PopUp2(excluir, excluir2, opcion) {
+            iFamiliaID = 2
+            var jsM = "CargaPag(0,"
+            var jsF = ',"' + vcOpcionPadre + '")'
+            if (vcElementoX != '') {
+                jsM = "EjecVent(";
+                jsF = ")"
+            }
+            var Periodo1 =
+                '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Per�odo" OnClick=' +
+                jsM +
+                '"Periodo"' + jsF + '></li>'
+            var TipoCompra1 =
+                '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Tipo Compra" OnClick=' +
+                jsM + '"Tipo-Compra"' + jsF + '></li>'
+            var Comprador1 =
+                '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Empresa Compradora" OnClick=' +
+                jsM + '"Comprador"' + jsF + '></li>'
+            var Invitaciones1 =
+                '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Invitaciones" OnClick=' +
+                jsM + '"Invitaciones"' + jsF + '></li>'
+
+            if (iMes != 0) {
+                Periodo1 = ''
+            }
+            if (iCompradorID != 0) {
+                Comprador1 = ''
+            }
+            if (iInvitacionID != 0) {
+                Invitaciones1 = ''
+            }
+
+            var codigo = '<ul data-role="listview" data-view="list" data-select-node="true">' +
+                Periodo1 + Comprador1 + Invitaciones1 +
+                '</ul>'
+            Metro.dialog.create({
+                title: "<h4><span class='mif-clipboard'></span> Opciones de Consulta</h4>",
+                content: "<div>" + codigo + "</div>",
+                defaultAction: false,
+                clsDialog: "secondary",
+                actions: [{
+                    caption: "Cerrar",
+                    cls: "js-dialog-close alert",
+                }]
+            });
+        }
+
+        function Detalle(periodo, vcperiodo, pagina, vcGlosaGraf) {
+            var capa = 'dvCuerpo';
+            MuestraCargando();
+            if (iFamiliaID == 1) {
+                url = 'Detalle.asp?Periodo=' + vcperiodo + '&iPeriodo=' + periodo + '&Pagina=' + pagina +
+                    '&iMonedaID=' +
+                    iMonedaID + '&iAgnoVista=' + iAgnoVista + '&vcOpcionPadre=' + vcOpcionPadre + '&vcGlosaGraf=' +
+                    vcGlosaGraf + '&iFamiliaID=' + iFamiliaID + '&iMes=' + iMes + '&vcMes=' + vcMes +
+                    '&iTipoCompraID=' +
+                    iTipoCompraID + '&vcTipoCompra=' + vcTipoCompra + '&iCompradorID=' + iCompradorID +
+                    '&vcComprador=' +
+                    vcComprador
+            } else if (iFamiliaID == 2) {
+                url = 'Detalle.asp?Periodo=' + vcperiodo + '&iPeriodo=' + periodo + '&Pagina=' + pagina +
+                    '&iMonedaID=' +
+                    iMonedaID + '&iAgnoVista=' + iAgnoVista + '&vcOpcionPadre=' + vcOpcionPadre + '&vcGlosaGraf=' +
+                    vcGlosaGraf + '&iFamiliaID=' + iFamiliaID + '&iMes=' + iMes + '&vcMes=' + vcMes + '&iCompradorID=' +
+                    iCompradorID + '&vcComprador=' + vcComprador + '&iInvitacionID=' + iInvitacionID +
+                    '&vcInvitacion=' +
+                    vcInvitacion
+            }
+            RecargarDiv(capa, url)
+        }
+
+        function CargaPag(opcion, vcGlosaGraf, vcOpcionPadre) {
+            var capa = 'dvCuerpo'
+            var url = ''
+            var vcGlosaTem;
+            MuestraCargando();
+            if (opcion == 1) {
+                vcGlosaTem = 'Monto'
+            } else if (opcion == 2) {
+                vcGlosaTem = 'Cantidad'
+            } else if (opcion == 0) {
+                vcGlosaTem = 'ini'
+            }
+            if (iFamiliaID == 1) {
+                url = 'Paneles.asp?vcFiltroSP=' + vcFiltroSP + '&Opcion=Panel1&vcGlosa=' + vcGlosaTem + '&iMonedaID=' +
+                    iMonedaID + '&vcGlosaGraf=' + vcGlosaGraf + '&vcOpcionPadre=' + vcOpcionPadre + '&iAgnoVista=' +
+                    iAgnoVista + '&ExPadre=' + vcExcluirGlobal + '&iFamiliaID=' + iFamiliaID + '&iMes=' + iMes +
+                    '&vcMes=' +
+                    vcMes + '&iTipoCompraID=' + iTipoCompraID + '&vcTipoCompra=' + vcTipoCompra + '&iCompradorID=' +
+                    iCompradorID + '&vcComprador=' + vcComprador + '&vcVectorOpcionesSel=' + vcVectorOpcionesSel +
+                    '&iOrdenSP=' + iOrdenSP
+            } else if (iFamiliaID == 2) {
+                url = 'Paneles.asp?vcFiltroSP=' + vcFiltroSP + '&Opcion=Panel1&vcGlosa=' + vcGlosaTem + '&iMonedaID=' +
+                    iMonedaID + '&vcGlosaGraf=' + vcGlosaGraf + '&vcOpcionPadre=' + vcOpcionPadre + '&iAgnoVista=' +
+                    iAgnoVista + '&ExPadre=' + vcExcluirGlobal + '&iFamiliaID=' + iFamiliaID + '&iMes=' + iMes +
+                    '&vcMes=' +
+                    vcMes + '&iCompradorID=' + iCompradorID + '&vcComprador=' + vcComprador + '&iInvitacionID=' +
+                    iInvitacionID + '&vcInvitacion=' + vcInvitacion + '&vcVectorOpcionesSel=' + vcVectorOpcionesSel +
+                    '&iOrdenSP=' + iOrdenSP
+            }
+            RecargarDiv(capa, url)
+        }
+
+        function recargamon(valmoneda) {
+            MuestraCargando();
+            iMonedaID = valmoneda
+            if (vcPaginaActual == 'PanelInicial.asp') {
+                window.top.location.href = vcPaginaActual + '?iMonedaID=' + iMonedaID + '&iAgnoVista=' + iAgnoVista
+            } else if (vcPaginaActual == 'Paneles.asp') {
+                CargaPag(0, vcExcluirGlobal, vcOpcionPadre)
+            } else if (vcPaginaActual == 'Detalle.asp') {
+                Detalle(iDetalleAux, vcDetalleAux, 1, vcExcluirGlobal)
+            } else if (vcPaginaActual == 'Comparativo.asp?Comparativo=2') {
+                ComparaYoY()
+            }
+        }
+
+        function CambiaAgno(agno) {
+            MuestraCargando();
+            iAgnoVista = agno
+            if (vcPaginaActual == 'PanelInicial.asp') {
+                window.top.location.href = vcPaginaActual + '?iMonedaID=' + iMonedaID + '&iAgnoVista=' + iAgnoVista
+            } else if (vcPaginaActual == 'Paneles.asp') {
+                CargaPag(0, vcExcluirGlobal, vcOpcionPadre)
+            }
+        }
+
+        function DesmarcaCheck(opcion, agno) {
+            if (vcAgnoComparado.indexOf(agno) >= 0) {
+                vcAgnoComparado = vcAgnoComparado.replace(agno + '-', '')
+                iContador = parseInt(iContador - 1)
+            } else {
+                vcAgnoComparado = vcAgnoComparado + agno + '-'
+                iContador = parseInt(iContador + 1)
+            }
+        }
+
+        function ComparaYoY(opcion) {
+            var capa = 'dvCuerpo'
+            var url;
+            var url;
+            var notify = Metro.notify;
+            if (iContador == 1) {
+                notify.create('Debe Seleccionar m�s de<BR> un A�o a Comparar.', '<B>Informativo:</B>', {
+                    cls: 'alert'
+                });
+            } else if (iContador > 2) {
+                notify.create('Debe Seleccionar Solo<BR> dos A�os a Comparar.', '<B>Informativo:</B>', {
+                    cls: 'alert'
+                });
+            } else if (iContador == 0) {
+                notify.create('Debe Seleccionar dos A�os<BR> a Comparar.', '<B>Informativo:</B>', {
+                    cls: 'alert'
+                });
+            } else {
+                if (opcion == 0) {
+                    var jsM = 'vcExcluirGlobal='
+                    var jsF = ';ComparaYoY(1)'
+                    var Periodo1 =
+                        '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Per�odo" OnClick=' +
+                        jsM + '"Periodo"' + jsF + '></li>'
+                    var TipoCompra1 =
+                        '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Tipo Compra" OnClick=' +
+                        jsM + '"Tipo-Compra"' + jsF + '></li>'
+                    var Comprador1 =
+                        '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Empresa Compradora" OnClick=' +
+                        jsM + '"Comprador"' + jsF + '></li>'
+
+                    var codigo = '<ul data-role="listview" data-view="list" data-select-node="true">' +
+                        Periodo1 + TipoCompra1 + Comprador1 +
+                        '</UL>';
+                    Metro.dialog.create({
+                        title: "<h4><span class='mif-clipboard'></span> Comparar a�os por:</h4>",
+                        content: '<div>' + codigo + '</div>',
+                        defaultAction: false,
+                        clsDialog: 'secondary',
+                        actions: [{
+                            caption: 'Cerrar',
+                            cls: 'js-dialog-close alert',
+                        }]
+                    });
+                } else if (opcion != 0) {
+                    MuestraCargando();
+                    url = 'Comparativo.asp?Comparativo=2&vcAgnoComparado=' + vcAgnoComparado +
+                        '&vcOpcionPadre=' + vcOpcionPadre + '&iMonedaID=' + iMonedaID +
+                        '&vcGlosaGraf=' + vcExcluirGlobal + '&iOrdenSP=' + iOrdenSP
+                    RecargarDiv(capa, url)
+                }
+            }
+        }
+
+        function Cronos() {
+            vcAgnoComparado = '-';
+            iContador = 0;
+            var iAltoPantalla = $(window).height() * 0.43;
+            var codigo2;
+            codigo2 =
+                '<p align="center">Seleccione solo dos a�os a comparar :</p><p class="fg-black p-1" align="center">' +
+                '<div id="jeje" name="jeje" data-role="panel" data-height="' + iAltoPantalla + '">' +
+                '<input type="checkbox" data-role="checkbox" id="Agno0" ' +
+                'value="2021"' +
+                ' OnClick="DesmarcaCheck(0,this.value);"/>' +
+                '2021' +
+                '</br>' +
+                '<input type="checkbox" data-role="checkbox" id="Agno1" ' +
+                'value="2020"' +
+                ' OnClick="DesmarcaCheck(0,this.value);"/>' +
+                '2020' +
+                '</br>' +
+                '<input type="checkbox" data-role="checkbox" id="Agno2" ' +
+                'value="2019"' +
+                ' OnClick="DesmarcaCheck(0,this.value);"/>' +
+                '2019' +
+                '</br>' +
+                '<input type="checkbox" data-role="checkbox" id="Agno3" ' +
+                'value="2018"' +
+                ' OnClick="DesmarcaCheck(0,this.value);"/>' +
+                '2018' +
+                '</br>' +
+                '<input type="checkbox" data-role="checkbox" id="Agno4" ' +
+                'value="2017"' +
+                ' OnClick="DesmarcaCheck(0,this.value);"/>' +
+                '2017' +
+                '</br>' +
+                '<input type="checkbox" data-role="checkbox" id="Agno5" ' +
+                'value="2016"' +
+                ' OnClick="DesmarcaCheck(0,this.value);"/>' +
+                '2016' +
+                '</br>' +
+                '<input type="checkbox" data-role="checkbox" id="Agno6" ' +
+                'value="2015"' +
+                ' OnClick="DesmarcaCheck(0,this.value);"/>' +
+                '2015' +
+                '</br>' +
+                '</div></br><button class="button success js-dialog-close" OnClick="ComparaYoY(0)">' +
+                '<span class="mif-tab on-left"></span> Comparar</button></P>'
+            Metro.dialog.create({
+                title: "<h4><span class='mif-display'></span> A�os a Comparar:</h4>",
+                content: '<div>' + codigo2 + '</div>',
+                defaultAction: false,
+                closeButton: true,
+                overlayClickClose: true
+            });
+        }
+
+        function ExpExcel(SP, campo) {
+            if (vcPaginaActual == 'Detalle.asp') {
+                url = 'http://www.senegocia.com/ExportaInfoBI/ExportaInfoBI.aspx?SP=' + SP + '&iMonedaID=' + iMonedaID +
+                    '&iAgnoVista=' + iAgnoVista + '&vcPaginaActual=' + vcPaginaActual + '&CampoT=' + campo +
+                    '&iFamiliaID=' +
+                    iFamiliaID
+            } else {
+                url = 'ExportaInfo.php?SP=' + SP + '&iMonedaID=' + iMonedaID +
+                    '&iAgnoVista=' + iAgnoVista + '&vcPaginaActual=' + vcPaginaActual + '&CampoT=' + campo +
+                    '&iFamiliaID=' +
+                    iFamiliaID
+            }
+            window.open(url, 'Exporta')
+        }
+
+        function uniongraf(vcMonedaIcon, GlosaPadre, vcGlosaGraf, iAgnoVista1, iAgnoVista2) {
+            var iAltoPantalla = $(window).height() * 0.53;
+            var codigo = '<div id="Union" data-role="panel" data-height="' + iAltoPantalla + '"></div>'
+            Metro.dialog.create({
+                title: "<h4><span class='mif-chart-dots'></span> Gr�fico Comparativo</h4>",
+                content: '<div>' + codigo + '</div>',
+                defaultAction: false,
+                closeButton: true,
+                overlayClickClose: true,
+                clsDialog: 'pos-top-center w-100 h-100 m-3',
+                actions: [{
+                    caption: 'Cerrar',
+                    cls: 'js-dialog-close alert',
+                }]
+            });
+            var capa = 'Union'
+            var url = 'GraficoComparativo.asp?vcMonedaIcon=' + vcMonedaIcon + '&vcGlosaPadre=' +
+                GlosaPadre + '&vcGlosaGraf=' + vcGlosaGraf + '&iAgnoVista1=' + iAgnoVista1 +
+                '&iAgnoVista2=' + iAgnoVista2 + '&vcArmaCategoria1=' + vcArmaCategoria1 +
+                '&vcArmaMonto1=' + vcArmaMonto1 + '&vcArmaCant1=' + vcArmaCant1 + '&vcArmaMonto2=' +
+                vcArmaMonto2 + '&vcArmaCant2=' + vcArmaCant2 + '&vcArmaCategoria2=' + vcArmaCategoria2
+            RecargarDiv(capa, url)
+        }
+
+        function OrdenaTabla() {
+            // call the tablesorter Js                                                                      
+            if (vcPaginaActual == 'Paneles.asp') {
+                $('#TablaNivel').tablesorter({
+                    sortList: [
+                        [0, 0],
+                        [1, 0]
+                    ]
+                });
+            } else if (vcPaginaActual == 'Detalle.asp') {
+                $('#tDet').tablesorter({
+                    dateFormat: 'uk',
+                    sortList: [
+                        [0, 0],
+                        [1, 0]
+                    ]
+                });
+            } else if (vcPaginaActual == 'Comparativo.asp?Comparativo=2') {
+                if (iComparativoTablaX == 1) {
+                    $('#Comparativo1').tablesorter({
+                        sortList: [
+                            [0, 0],
+                            [1, 0]
+                        ]
+                    });
+                } else if (iComparativoTablaX == 2) {
+                    $('#Comparativo2').tablesorter({
+                        sortList: [
+                            [0, 0],
+                            [1, 0]
+                        ]
+                    });
+                }
+            }
+        }
+
+        function OrdenaIcons(objeto_ID) {
+            OrdenaTabla();
+            var objeto = $('#' + objeto_ID)
+            if (vcPaginaActual == 'Paneles.asp') {
+                $("#periodo").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#cantidad").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#porcCant").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#monto").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#porcMonto").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+            } else if (vcPaginaActual == 'Detalle.asp') {
+                $("#Row").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#NumOC").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#RutProv").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#NomProv").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#FechEmi").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#FechPub").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#MonOri").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#MtoNet").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+                $("#MtoTot").addClass("mif-arrow-right")
+                    .removeClass("mif-arrow-down")
+                    .removeClass("mif-arrow-up")
+            } else if (vcPaginaActual == 'Comparativo.asp?Comparativo=2') {
+                if (iComparativoTablaX == 1) {
+                    $("#Nodo1").addClass("mif-arrow-right")
+                        .removeClass("mif-arrow-down")
+                        .removeClass("mif-arrow-up")
+                    $("#cantidad1").addClass("mif-arrow-right")
+                        .removeClass("mif-arrow-down")
+                        .removeClass("mif-arrow-up")
+                    $("#porcCant1").addClass("mif-arrow-right")
+                        .removeClass("mif-arrow-down")
+                        .removeClass("mif-arrow-up")
+                    $("#monto1").addClass("mif-arrow-right")
+                        .removeClass("mif-arrow-down")
+                        .removeClass("mif-arrow-up")
+                    $("#porcMonto1").addClass("mif-arrow-right")
+                        .removeClass("mif-arrow-down")
+                        .removeClass("mif-arrow-up")
+                    if (($("#Controlador").val() == 0) || ($("#Controlador").val() == 2)) {
+                        $(objeto).addClass("mif-arrow-down")
+                            .removeClass("mif-arrow-up")
+                            .removeClass("mif-arrow-right")
+                        $("#Controlador").val(1)
+                    } else if ($("#Controlador").val() == 1) {
+                        $(objeto).addClass("mif-arrow-up")
+                            .removeClass("mif-arrow-down")
+                            .removeClass("mif-arrow-right")
+                        $("#Controlador").val(2)
+                    }
+                } else if (iComparativoTablaX == 2) {
+                    $("#Nodo2").addClass("mif-arrow-right")
+                        .removeClass("mif-arrow-down")
+                        .removeClass("mif-arrow-up")
+                    $("#cantidad2").addClass("mif-arrow-right")
+                        .removeClass("mif-arrow-down")
+                        .removeClass("mif-arrow-up")
+                    $("#porcCant2").addClass("mif-arrow-right")
+                        .removeClass("mif-arrow-down")
+                        .removeClass("mif-arrow-up")
+                    $("#monto2").addClass("mif-arrow-right")
+                        .removeClass("mif-arrow-down")
+                        .removeClass("mif-arrow-up")
+                    $("#porcMonto2").addClass("mif-arrow-right")
+                        .removeClass("mif-arrow-down")
+                        .removeClass("mif-arrow-up")
+                    if (($("#Controlador2").val() == 0) || ($("#Controlador2").val() == 2)) {
+                        $(objeto).addClass("mif-arrow-down")
+                            .removeClass("mif-arrow-up")
+                            .removeClass("mif-arrow-right")
+                        $("#Controlador2").val(1)
+                    } else if ($("#Controlador2").val() == 1) {
+                        $(objeto).addClass("mif-arrow-up")
+                            .removeClass("mif-arrow-down")
+                            .removeClass("mif-arrow-right")
+                        $("#Controlador2").val(2)
+                    }
+                }
+            }
+            if (vcPaginaActual != 'Comparativo.asp?Comparativo=2') {
+                if (($("#Controlador").val() == 0) || ($("#Controlador").val() == 2)) {
+                    $(objeto).addClass("mif-arrow-down")
+                        .removeClass("mif-arrow-up")
+                        .removeClass("mif-arrow-right")
+                    $("#Controlador").val(1)
+                } else if ($("#Controlador").val() == 1) {
+                    $(objeto).addClass("mif-arrow-up")
+                        .removeClass("mif-arrow-down")
+                        .removeClass("mif-arrow-right")
+                    $("#Controlador").val(2)
+                }
+            }
+        }
+    </script>
+    <style></style>
+</head>
+
+<body>
+    <div class="notify-container"></div>
+    <div class="demo-wrapper"></div>
+    <div id="idMensajePag" align="center" style="opacity: 0.7; display: none;">
+
+        <br><br><br>
+        <h1 class="fg-darkRed">Cargando Datos, por favor espere un momento</h1><br><span class="mif-spinner4 ani-spin mif-5x fg-darkCyan"></span>
+    </div>
+    <div class="r-page random-r-page" id="cortina">
+        <div class="page-content" id="ventana">
+        </div>
+    </div>
+    <div class="pos-relative z-dropdown shadow-1 ninjaImpreso app-bar app-bar-expand" data-role="appbar" data-expand-point="md" id="app-bar-1611923218638359" data-role-appbar="true"><button type="button" class="hamburger menu-down dark hidden"><span class="line"></span><span class="line"></span><span
+                class="line"></span></button>
+        <a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" class="app-bar-item brand no-hover"><img src="./Senegocia - B.I._files/logo_senegocia_web.gif" width="70"></a>
+        <a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" class="app-bar-item brand no-hover"><img id="LogoComp" src="./Senegocia - B.I._files/logo_282.gif" width="70"></a>
+        <a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp" class="app-bar-item"><span
+                class="icon mif-home"></span></a>
+        <ul class="app-bar-menu collapsed">
+            <li><input type="hidden" id="Notificame" value="0">
+                <a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" class="dropdown-toggle" onmouseover="VerificaVentana()">Año a visualizar <small id="vcMiniAgno">(2021)</small></a>
+                <a data-role="popover" data-cls-popover="bg-darkRed fg-white drop-shadow" data-popover-text="Solo puede cambiar el &lt;br&gt;año en primer nivel." data-popover-position="bottom" data-popover-trigger="focus" data-popover-hide="2000" id="iPopOverAgno" data-role-popover="true"></a>
+                <ul class="d-menu" data-role="dropdown" id="agno" data-role-dropdown="true" style="display: none;">
+                    <li><a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="CambiaAgno(2021)">
+                            2021</a></li>
+                    <li><a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="CambiaAgno(2020)">
+                            2020</a></li>
+                    <li><a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="CambiaAgno(2019)">
+                            2019</a></li>
+                    <li><a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="CambiaAgno(2018)">
+                            2018</a></li>
+                    <li><a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="CambiaAgno(2017)">
+                            2017</a></li>
+                    <li><a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="CambiaAgno(2016)">
+                            2016</a></li>
+                    <li><a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="CambiaAgno(2015)">
+                            2015</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" class="dropdown-toggle">Moneda a
+                    visualizar <small id="vcMiniMoneda">(CLP)</small></a>
+                <ul class="d-menu" data-role="dropdown" id="moneda" data-role-dropdown="true" style="display: none;">
+                    <li><a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="recargamon(2)">DOLAR</a></li>
+                    <li><a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="recargamon(14)">EURO</a></li>
+                    <li><a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="recargamon(5)">PESO
+                            CHILENO</a></li>
+                    <li><a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="recargamon(3)">UF</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" class="dropdown-toggle">Ver
+                    <small id="vcMiniProcent">Porcentajes de cuadro por: (cantidades)</small></a>
+                <ul class="d-menu" data-role="dropdown" id="procentaje" data-role-dropdown="true" style="display: none;">
+                    <li><a id="OpCantidades" href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="VerProcCuadros(this.id)">Cantidades</a></li>
+                    <li><a id="OpMontos" href="https://dev.senegocia.com/senegocia/vend/bi/PanelInicial.asp#" onclick="VerProcCuadros(this.id)">Montos</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="dvCuerpo" class="p-3 window-area"><br>
+        <div class="tiles-grid flex-justify-center">
+            <div id="dvSolPed" data-role="tile" data-size="wide" class="bg-grayBlue tile-wide" data-effect="animate-slide-up" onclick="Desmarcar(this.id, 432 , this)" data-role-tile="true">
+                <span class="badge-top inherit-background"><span class="mif-list"></span></span>
+                <div class="slide d-flex flex-align-center flex-justify-center">
+                    <h4>Cantidad: 432</h4>
+                </div>
+                <span class="branding-bar">Solicitud de cotizaciones</span>
+                <span class="badge-bottom inherit-background">100%</span>
+            </div>
+            <div id="dvCot" data-role="tile" data-size="wide" class="bg-lightGrayBlue tile-wide" data-effect="animate-slide-up" onclick="Desmarcar(this.id, 60 , this)" data-role-tile="true">
+                <span class="badge-top inherit-background"><span class="mif-pencil"></span></span>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="z-index: 2; top: 0px; opacity: 1; left: 0px;">
+                    <h4>Cantidad: 60</h4>
+                </div>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="top: -150px; left: 0px; z-index: 1; opacity: 0;">
+                    <h4><span class="mif-money"></span>23.136.257 CLP </h4>
+                </div>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="top: -150px; left: 0px; z-index: 1; opacity: 0;">
+                    <h4>16,9%</h4>
+                </div>
+                <span class="badge-bottom inherit-background">16,9%</span>
+                <span class="branding-bar">Cotización</span>
+            </div>
+            <div id="dvContMarco" data-role="tile" data-size="wide" class="bg-lightGrayBlue tile-wide" data-effect="animate-slide-up" onclick="Desmarcar(this.id, 224 , this)" data-role-tile="true">
+                <span class="badge-top inherit-background"><span class="mif-bookmark"></span></span>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="z-index: 2; top: 0px; opacity: 1; left: 0px;">
+                    <h4>Cantidad: 224</h4>
+                </div>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="top: -150px; left: 0px; z-index: 1; opacity: 0;">
+                    <h4><span class="mif-money"></span>8.469.335 CLP </h4>
+                </div>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="top: -150px; left: 0px; z-index: 1; opacity: 0;">
+                    <h4>63,1%</h4>
+                </div>
+                <span class="badge-bottom inherit-background">63,1%</span>
+                <span class="branding-bar">Contrato Marco</span>
+            </div>
+            <div id="dvCompDir" data-role="tile" data-size="wide" class="bg-lightGrayBlue tile-wide" data-effect="animate-slide-up" onclick="Desmarcar(this.id, 71 , this)" data-role-tile="true">
+                <span class="badge-top inherit-background"><span class="mif-tab"></span></span>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="z-index: 2; top: 0px; opacity: 1; left: 0px;">
+                    <h4>Cantidad: 71</h4>
+                </div>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="top: -150px; left: 0px; z-index: 1; opacity: 0;">
+                    <h4><span class="mif-money"></span>5.263.135 CLP </h4>
+                </div>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="top: -150px; left: 0px; z-index: 1; opacity: 0;">
+                    <h4>20,0%</h4>
+                </div>
+                <span class="badge-bottom inherit-background">20,0%</span>
+                <span class="branding-bar">Compra Directa</span>
+            </div>
+            <div id="dvOC" data-role="tile" data-size="wide" class="bg-steel tile-wide" data-effect="animate-slide-up" onclick="Desmarcar(this.id, 355 , this)" data-role-tile="true">
+                <span class="badge-top inherit-background"><span class="mif-clipboard"></span></span>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="z-index: 2; top: 0px; opacity: 1; left: 0px;">
+                    <h4>Cantidad: 355</h4>
+                </div>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="top: -150px; left: 0px; z-index: 1; opacity: 0;">
+                    <h4><span class="mif-money"></span>36.868.727 CLP </h4>
+                </div>
+                <div class="slide d-flex flex-align-center flex-justify-center" style="top: -150px; left: 0px; z-index: 1; opacity: 0;">
+                    <h4>100%</h4>
+                </div>
+                <span class="badge-bottom inherit-background">100%</span>
+                <span class="branding-bar">Ordenes de compra</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
+
+
+</body>
+
+</html>
