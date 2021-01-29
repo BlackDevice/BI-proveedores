@@ -264,7 +264,7 @@
                 PopUp2(vcExcluirGlobal, vcExcluirGlobal2, vcOpcionPadre)
             } else {
                 var notify = Metro.notify;
-                notify.create('No hay Informaci�n a mostrar.<BR> Favor seleccione otro Panel.', '<B>Informativo:</B>', {
+                notify.create('No hay Información a mostrar.<BR> Favor seleccione otro Panel.', '<B>Informativo:</B>', {
                     cls: 'alert'
                 });
             }
@@ -325,7 +325,7 @@
                 iTileID = vcElementoX.id
             if (iTileID == 'dvCot') {
                 TituloTile = '<H1 CLASS="text-center fg-white">' +
-                    '<I CLASS="icon-pencil"></I> Cotizaci�n</H1><BR>'
+                    '<I CLASS="icon-pencil"></I> Cotización</H1><BR>'
             } else if (iTileID == 'dvSolPed') {
                 TituloTile = '<H1 CLASS="text-center fg-white">' +
                     '<I CLASS="icon-list"></I> Cotizaciones</H1><BR>'
@@ -385,7 +385,7 @@
                 jsF = ")"
             }
             var Periodo1 =
-                '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Per�odo" OnClick=' +
+                '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Período" OnClick=' +
                 jsM +
                 '"Periodo"' + jsF + '></li>'
             var TipoCompra1 =
@@ -430,7 +430,7 @@
                 jsF = ")"
             }
             var Periodo1 =
-                '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Per�odo" OnClick=' +
+                '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Período" OnClick=' +
                 jsM +
                 '"Periodo"' + jsF + '></li>'
             var TipoCompra1 =
@@ -564,15 +564,15 @@
             var url;
             var notify = Metro.notify;
             if (iContador == 1) {
-                notify.create('Debe Seleccionar m�s de<BR> un A�o a Comparar.', '<B>Informativo:</B>', {
+                notify.create('Debe Seleccionar más de<BR> un Año a Comparar.', '<B>Informativo:</B>', {
                     cls: 'alert'
                 });
             } else if (iContador > 2) {
-                notify.create('Debe Seleccionar Solo<BR> dos A�os a Comparar.', '<B>Informativo:</B>', {
+                notify.create('Debe Seleccionar Solo<BR> dos Años a Comparar.', '<B>Informativo:</B>', {
                     cls: 'alert'
                 });
             } else if (iContador == 0) {
-                notify.create('Debe Seleccionar dos A�os<BR> a Comparar.', '<B>Informativo:</B>', {
+                notify.create('Debe Seleccionar dos Años<BR> a Comparar.', '<B>Informativo:</B>', {
                     cls: 'alert'
                 });
             } else {
@@ -580,7 +580,7 @@
                     var jsM = 'vcExcluirGlobal='
                     var jsF = ';ComparaYoY(1)'
                     var Periodo1 =
-                        '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Per�odo" OnClick=' +
+                        '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Período" OnClick=' +
                         jsM + '"Periodo"' + jsF + '></li>'
                     var TipoCompra1 =
                         '<li class="js-dialog-close" data-caption="<span class=mif-chevron-right></span> Tipo Compra" OnClick=' +
@@ -618,7 +618,7 @@
             var iAltoPantalla = $(window).height() * 0.43;
             var codigo2;
             codigo2 =
-                '<p align="center">Seleccione solo dos a�os a comparar :</p><p class="fg-black p-1" align="center">' +
+                '<p align="center">Seleccione solo dos años a comparar :</p><p class="fg-black p-1" align="center">' +
                 '<div id="jeje" name="jeje" data-role="panel" data-height="' + iAltoPantalla + '">' +
                 '<input type="checkbox" data-role="checkbox" id="Agno0" ' +
                 'value="2021"' +
@@ -658,7 +658,7 @@
                 '</div></br><button class="button success js-dialog-close" OnClick="ComparaYoY(0)">' +
                 '<span class="mif-tab on-left"></span> Comparar</button></P>'
             Metro.dialog.create({
-                title: "<h4><span class='mif-display'></span> A�os a Comparar:</h4>",
+                title: "<h4><span class='mif-display'></span> Años a Comparar:</h4>",
                 content: '<div>' + codigo2 + '</div>',
                 defaultAction: false,
                 closeButton: true,
@@ -685,7 +685,7 @@
             var iAltoPantalla = $(window).height() * 0.53;
             var codigo = '<div id="Union" data-role="panel" data-height="' + iAltoPantalla + '"></div>'
             Metro.dialog.create({
-                title: "<h4><span class='mif-chart-dots'></span> Gr�fico Comparativo</h4>",
+                title: "<h4><span class='mif-chart-dots'></span> Gráfico Comparativo</h4>",
                 content: '<div>' + codigo + '</div>',
                 defaultAction: false,
                 closeButton: true,
