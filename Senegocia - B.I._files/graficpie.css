@@ -1,0 +1,205 @@
+div.saltopagina{
+   display: none;
+}
+
+#chart {
+  border: 0px solid #333;
+}
+#gbarras {
+  border: 0px solid #333;          
+}
+
+.tabVerticalLines tr {
+    border-right: 2px solid;
+    border-left: 2px solid;
+    border-collapse: separate;
+    border-color: gray;
+}
+
+.tabVerticalLines td {
+      border-right: 2px solid;
+      border-collapse: separate;
+      border-color: gray;
+}  
+
+.tabVerticalLines table{
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    border-collapse: separate;
+    border-color: gray;
+}       
+
+.tabVerticalLines2 table{
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    border-collapse: separate;
+    border-color: gray;
+}
+
+.megamenu {
+   height:80px;
+}
+#chart {
+  display: block;
+  margin: 0 0 50px 0;
+  float: left;
+  cursor: pointer;
+}
+#chartData td {
+  cursor: pointer;
+}
+.ninja {
+	visibility:hidden;
+	display:none;
+}
+.metro .manitas :hover {
+  cursor: pointer;      
+}
+.metro .tile.resizeDV {
+  width: 95%;
+  max-width: 500px;
+  min-width: 110px;
+}
+.resizeDV2{
+  max-width: 310px;
+  min-width: 210px;
+  width: 95%;
+}
+.resizeDV3{
+  height:98%;
+  width:98%;
+  position:relative;
+}
+.medio{
+  width:50%;
+}
+.todo{
+  width:100%;
+}
+.tercio{
+  width:33%;
+}
+.centraDV {
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+
+}
+
+.metro .table2 {
+  width: 90%;
+  margin-bottom: 14pt;
+}
+.metro .table2 th,
+.metro .table2 td {
+  padding: 4px;
+  font-size: 12px;
+  line-height: 12pt;
+  vertical-align: top;
+  border-bottom: 1px #eaeaea solid;
+}
+.metro .table2 th[class*="span"],
+.metro .table2 td[class*="span"] {
+  display: table-cell !important;
+  float: none !important;
+  margin: 0;
+}
+.metro .table2 thead th {
+  vertical-align: bottom;
+}
+.metro .table2 thead th,
+.metro .table2 thead td {
+  border-bottom: 1px solid #111111;
+}
+.metro .table2 tbody tr:last-child td {
+  border-bottom: 0;
+}
+.metro .table2 tbody + tbody {
+  border-top: 2px solid #eaeaea;
+}
+.metro .table2 tfoot th,
+.metro .table2 tfoot td {
+  border-top: 1px solid #111111;
+}
+.metro .table2 .table {
+  background-color: #bfbfbf;
+}
+.metro .table2.condensed th,
+.metro .table2.condensed td {
+  padding: 2px 5px;
+}
+.metro .table2.condensed th .input-control,
+.metro .table2.condensed td .input-control {
+  margin: 0;
+}
+.metro .table2.super-condensed th,
+.metro .table2.super-condensed td {
+  padding: 2px;
+}
+.metro .table2.super-condensed th .input-control,
+.metro .table2.super-condensed td .input-control {
+  margin: 0;
+}
+.metro .table2.hovered tbody tr:hover {
+  background-color: rgba(28, 183, 236, 0.1);
+}
+
+.sinBarra {
+  overflow: hidden;
+}
+
+.ScrollTable{
+}
+table.ScrollTable tbody,
+table.ScrollTable tfoot,
+table.ScrollTable thead { display: block; }
+
+table.ScrollTable tbody {
+    max-height: 320px;
+    width:99.9%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+table.ScrollTable tfoot td {
+    //border: 1px solid;
+    
+}
+
+table.ScrollTable tbody::-webkit-scrollbar {
+    //width: 1em;
+    width: 4px;
+    height: 10px;
+}
+
+table.ScrollTable tbody::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+table.ScrollTable tbody::-webkit-scrollbar-thumb {
+  background-color: rgb(124, 181, 236);//#9a1616;//#d9d9d9;
+  outline: 1px solid slategrey;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+body::-webkit-scrollbar {
+    //width: 1em;
+    width: 6px;
+    height: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #d9d9d9;//rgb(124, 181, 236);//#9a1616;
+  outline: 1px solid slategrey;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+   
